@@ -1,0 +1,68 @@
+1.
+OPERATOR ARITMATIKA ;
+KETERANGAN              SIMBOL 
++                       PENJUMLAHAN 
+-                       PENGURANGAN 
+*                       PERKALIAN 
+**                      PEMANGKATAN    
+/                       PEMBAGIAN
+%                       SISA BAGI
+
+OPERATOR PENEGASAN 
+KETERANGAN              SIMBOL 
+=                       PENGISIAN NILAI 
++=                      PENGISIAN DAN TAMBAH 
+-=                      PENGISIAN DAN KURANG
+*=                      PENGISIAN DAN KALI
+**=                     PENGISIAN DAN PEMANGKATAN
+/=                      PENGISIAN DAN PEMBAGIAN
+%=                      PENGISIAN DAN PEMBAGIAN 
+.=                      PENGISIAN DAN PENGGABUNGAN STRING 
+
+OPERATOR INCREMENT DAN DECREMENT 
+KETERANGAN          SIMBOL 
+$++;                TAMBAH 1
+$--;                KURANG 1 
+
+OPERATOR RELASI 
+KETERANGAN          SIMBOL 
+>                   LEBIH BESAR   
+<                   LEBIH KECIL 
+== ATAU ===         SAMA DENGAN 
+!= ATAU !==         TIDAK SAMA DENGAN 
+>=                  LEBIH BESAR SAMA DENGAN 
+<=                  LEBIH KECIL SAMA DENGAN 
+
+
+2.
+OPERATOR LOGIKA 
+SIMBOL          KETERANGAN 
+&&              LOGIKA AND 
+||              LOGIKA OR 
+!               LOGIKA NEGASI / KEBALIKAN NOT 
+
+
+AND               HASIL                      OR             HASIL 
+TRUE  = TRUE      TRUE                 TRUE   = TRUE       TRUE
+TRUE  = FALSE     FALSE                TRUE   = FALSE      TRUE    
+FALSE = TRUE      FALSE                FALSE  = TRUE       TRUE 
+FALSE = FALSE     FALSE                FALSE  = FALSE      FALSE 
+
+
+NOT         HASIL 
+TRUE        FALSE 
+FALSE       TRUE 
+
+
+3. OPERATOR TERNARY 
+  $suka   = TRUE 
+    $jawab = $suka ? "iya": "tidak";
+
+4. OPERATOR BITWISE 
+SIMBOL     KETERANGAN 
+&           AND 
+|           OR 
+^           XOR 
+~           NEGASI / KEBALIKAN 
+<<          LEFT SHIFT 
+>>          RIGHT SHIFT
