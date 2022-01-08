@@ -19,13 +19,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($jenis_pasien as $jancuk )
+                        @foreach ($jenispasien as $jancuk )
                         <tr>
                             <td width='5'>  {{ $loop-> index +1 }} </td>
                             <td width='20'> {{ $jancuk->nama_jenis_pasien  }}  </td>
-                            <td width='5'>  <a href="{{ route('admin.jenispasien.edit', $jancuk->jenis_pasien_id) }}" class="btn btn-warning">EDIT</a></td>
+                            <td width='5'>  <a href="{{ route('admin.jenispasien.edit', $jancuk->jenispasien_id) }}" class="btn btn-warning">EDIT</a></td>
                             <td width='5'>
-                                <form action="{{ route('admin.jenispasien.destroy', $jancuk->jenis_pasien_id) }}" method="post" style="display:inline;">
+                                <form action="{{ route('admin.jenispasien.destroy', $jancuk->jenispasien_id) }}" method="post" style="display:inline;">
                                     {{ csrf_field() }}
                                     {{ method_field ('delete')}}
                                     <button type="submit"  class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')">DELETE</button>

@@ -17,7 +17,7 @@ class JenispasienController extends Controller
     public function index()
     {
         //
-        $jenis_pasien = DB::table('jenispasien')->get();
+        $jenispasien = DB::table('jenispasien')->get();
 
         return view('admin.jenispasien.index', compact('jenispasien'));
     }
@@ -42,7 +42,7 @@ class JenispasienController extends Controller
     public function store(Request $request)
     {
         //
-        DB::table('jenis_pasien')
+        DB::table('jenispasien')
             ->insert([
                 'nama_jenis_pasien' => $request->nama_jenis_pasien,
             ]);
@@ -68,15 +68,15 @@ class JenispasienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($jenis_pasien_id)
+    public function edit($jenispasien_id)
     {
         //
-        $jenis_pasien  = DB::table('jenis_pasien')
-            ->where('jenis_pasien_id', $jenis_pasien_id)
+        $jenispasien  = DB::table('jenispasien')
+            ->where('jenispasien_id', $jenispasien_id)
             ->first();
 
         $data  = array(
-            'jenis_pasien'      => $jenis_pasien
+            'jenispasien'      => $jenispasien,
         );
 
         return view('admin.jenispasien.edit', $data);
@@ -89,11 +89,11 @@ class JenispasienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $jenis_pasien_id)
+    public function update(Request $request, $jenispasien_id)
     {
         //
-        $edit  = DB::table('jenis_pasien')
-            ->where('jenis_pasien_id', $request->jenis_pasien_id)
+        $edit  = DB::table('jenispasien')
+            ->where('jenispasien_id', $request->jenispasien_id)
             ->update([
                 'nama_jenis_pasien'    => $request->nama_jenis_pasien
             ]);
@@ -113,11 +113,11 @@ class JenispasienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($jenis_pasien_id)
+    public function destroy($jenispasien_id)
     {
         //
-        DB::table('jenis_pasien')
-            ->where('jenis_pasien_id', $jenis_pasien_id)
+        DB::table('jenispasien')
+            ->where('jenispasien_id', $jenispasien_id)
             ->delete();
 
         return redirect('admin/jenispasien')
