@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBisTable extends Migration
+class CreateProvinsiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateBisTable extends Migration
      */
     public function up()
     {
-        Schema::create('bis', function (Blueprint $table) {
-            $table->bigIncrements('bis_id');
-            $table->unsignedBigInteger('jumlah');
-            $table->string('jenis_bis');
+        Schema::create('provinsi', function (Blueprint $table) {
+            $table->bigIncrements('provinsi_id');
+            $table->string('nama_provinsi');
+            $table->date('tanggal_jadi_provinsi');
+            $table->text('keterangan');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateBisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bis');
+        Schema::dropIfExists('provinsi');
     }
 }

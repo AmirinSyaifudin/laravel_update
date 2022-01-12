@@ -5,6 +5,39 @@ Route::get('/', 'HomeController@index')->name('dashboard');
 // DASHBOARD
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 
+//PROVINSI
+Route::get('/provinsi/data', 'DataController@provinsi')->name('provinsi.data');
+Route::get('/provinsi', 'ProvinsiController@index')->name('provinsi.index');
+Route::get('/provinsi/create', 'ProvinsiController@create')->name('provinsi.create');
+// Route::get('/provinsi', 'provinsiController@data')->name('provinsi.data');
+Route::post('/provinsi', 'ProvinsiController@store')->name('provinsi.store');
+Route::get('/provinsi/{provinsi}/edit', 'ProvinsiController@edit')->name('provinsi.edit');
+Route::put('/provinsi/{provinsi}', 'ProvinsiController@update')->name('provinsi.update');
+Route::delete('/provinsi/{provinsi}', 'ProvinsiController@destroy')->name('provinsi.destroy');
+Route::get('/provinsi/{provinsi}/detail', 'ProvinsiController@detail')->name('provinsi.detail');
+
+//KOTA
+Route::get('/kota/data', 'DataController@kota')->name('kota.data');
+Route::get('/kota', 'KotaController@index')->name('kota.index');
+Route::get('/kota/create', 'KotaController@create')->name('kota.create');
+// Route::get('/kota', 'KotaController@data')->name('kota.data');
+Route::post('/kota', 'KotaController@store')->name('kota.store');
+Route::get('/kota/{kota}/edit', 'KotaController@edit')->name('kota.edit');
+Route::put('/kota/{kota}', 'KotaController@update')->name('kota.update');
+Route::delete('/kota/{kota}', 'KotaController@destroy')->name('kota.destroy');
+Route::get('/kota/{kota}/detail', 'KotaController@detail')->name('kota.detail');
+
+//KABUPATEN
+Route::get('/kabupaten/data', 'DataController@kabupaten')->name('kabupaten.data');
+Route::get('/kabupaten', 'KabupatenController@index')->name('kabupaten.index');
+Route::get('/kabupaten/create', 'KabupatenController@create')->name('kabupaten.create');
+// Route::get('/kabupaten', 'KabupatenController@data')->name('kabupaten.data');
+Route::post('/kabupaten', 'KabupatenController@store')->name('kabupaten.store');
+Route::get('/kabupaten/{kabupaten}/edit', 'KabupatenController@edit')->name('kabupaten.edit');
+Route::put('/kabupaten/{kabupaten}', 'KabupatenController@update')->name('kabupaten.update');
+Route::delete('/kabupaten/{kabupaten}', 'KabupatenController@destroy')->name('kabupaten.destroy');
+Route::get('/kabupaten/{kabupaten}/detail', 'KabupatenController@detail')->name('kabupaten.detail');
+
 //karyawan
 Route::get('/karyawan/data', 'DataController@karyawan')->name('karyawan.data');
 // Route::post('/karyawandatatable', 'KaryawanController@GETdata')->name('karyawan.get');

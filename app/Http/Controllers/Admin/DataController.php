@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Karyawan;
+use App\Provinsi;
+use App\Kota;
+use App\Kabupaten;
 use App\Pasien;
 use App\Cuti;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +15,63 @@ use DataTables;
 
 class DataController extends Controller
 {
+    //PROVINI
+    public function provinsi()
+    {
+        $provinsi = Provinsi::orderBy('nama_provinsi', 'ASC');
+
+        return datatables()->of($provinsi)
+            ->addColumn('action', 'admin.provinsi.action')
+            ->addIndexColumn() // membuat no urut
+            ->rawColumns(['action'])
+            ->toJson();
+    }
+
+    //KOTA
+    public function kota()
+    {
+        // $kotas = kota::orderBy('keterangan', 'ASC');
+        $kota = DB::table('kota')
+            ->join('provinsi', 'kota.provinsi_id', '=', 'provinsi.provinsi_id')
+            ->select(
+                'kota.nama_kota',
+                'kota.kode_pos',
+                'kota.keterangan',
+                'provinsi.nama_provinsi',
+            )
+            ->orderBy('kota.nama_kota', 'ASC')
+            ->get();
+
+        return datatables()->of($kota)
+            ->addColumn('action', 'admin.kota.action')
+            ->addIndexColumn()
+            ->toJson();
+    }
+
+    //KABUPATEN
+    public function kabupaten()
+    {
+        // $kabupatens = kabupaten::orderBy('keterangan', 'ASC');
+        $kabupaten = DB::table('kabupaten')
+            ->join('provinsi', 'kabupaten.provinsi_id', '=', 'provinsi.provinsi_id')
+            ->join('kota', 'kabupaten.kota_id', '=', 'kota.kota_id')
+            ->select(
+                'kabupaten.nama_kabupaten',
+                'kota.nama_kota',
+                'provinsi.nama_provinsi',
+                'kabupaten.kode_pos',
+                'kabupaten.keterangan',
+            )
+            ->orderBy('kabupaten.nama_kabupaten', 'ASC')
+            ->get();
+
+        return datatables()->of($kabupaten)
+            ->addColumn('action', 'admin.kabupaten.action')
+            ->addIndexColumn()
+            ->toJson();
+    }
+
+
 
     public function karyawan()
     {

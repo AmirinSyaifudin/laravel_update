@@ -4,6 +4,10 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
                     <li><a href="{{ route('admin.dashboard.index') }}"><i class="fa fa-user"></i> <span>DASHBOARD</span></a></li>
+                    <li><a href="{{ route('admin.provinsi.index') }}"><i class="fa fa-user"></i> <span>PROVINSI</span></a></li>
+                    <li><a href="{{ route('admin.kota.index') }}"><i class="fa fa-user"></i> <span>KOTA</span></a></li>
+                    <li><a href="{{ route('admin.kabupaten.index') }}"><i class="fa fa-user"></i> <span>KABUPATEN</span></a></li>
+                    
                     <li><a href="{{ route('admin.karyawan.index') }}"><i class="fa fa-user"></i> <span>KARYAWAN</span></a></li>
                     <li><a href="{{ route('admin.cuti.index') }}"><i class="fa fa-user"></i> <span>CUTI</span></a></li>
                     {{-- <li><a href="{{ route('admin.tablekaryawan.index') }}"><i class="fa fa-user"></i> <span>TABLE KARYAWAN</span></a></li>
