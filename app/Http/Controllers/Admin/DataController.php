@@ -16,37 +16,38 @@ use DataTables;
 class DataController extends Controller
 {
     //PROVINI
-    public function provinsi()
-    {
-        $provinsi = Provinsi::orderBy('nama_provinsi', 'ASC');
+    // public function provinsi()
+    // {
+    //     $provinsi = Provinsi::orderBy('nama_provinsi', 'ASC');
 
-        return datatables()->of($provinsi)
-            ->addColumn('action', 'admin.provinsi.action')
-            ->addIndexColumn() // membuat no urut
-            ->rawColumns(['action'])
-            ->toJson();
-    }
+    //     return datatables()->of($provinsi)
+    //         ->addColumn('action', 'admin.provinsi.action')
+    //         ->addIndexColumn() // membuat no urut
+    //         ->rawColumns(['action'])
+    //         ->toJson();
+    // }
 
     //KOTA
-    public function kota()
-    {
-        // $kotas = kota::orderBy('keterangan', 'ASC');
-        $kota = DB::table('kota')
-            ->join('provinsi', 'kota.provinsi_id', '=', 'provinsi.provinsi_id')
-            ->select(
-                'kota.nama_kota',
-                'kota.kode_pos',
-                'kota.keterangan',
-                'provinsi.nama_provinsi',
-            )
-            ->orderBy('kota.nama_kota', 'ASC')
-            ->get();
+    // public function kota()
+    // {
+    //     // $kotas = kota::orderBy('keterangan', 'ASC');
+    //     $kota = DB::table('kota')
+    //         ->join('provinsi', 'kota.provinsi_id', '=', 'provinsi.provinsi_id')
+    //         ->select(
+    //             'kota.nama_kota',
+    //             'kota.kode_pos',
+    //             'kota.keterangan',
+    //             'provinsi.nama_provinsi',
+    //         )
+    //         ->orderBy('kota.nama_kota', 'ASC')
+    //         ->get();
 
-        return datatables()->of($kota)
-            ->addColumn('action', 'admin.kota.action')
-            ->addIndexColumn()
-            ->toJson();
-    }
+    //     return datatables()->of($kota)
+    //         ->addColumn('action', 'admin.kota.action')
+    //         ->addIndexColumn()
+    //         ->rawColumns(['action'])
+    //         ->toJson();
+    // }
 
     //KABUPATEN
     public function kabupaten()
@@ -68,15 +69,13 @@ class DataController extends Controller
         return datatables()->of($kabupaten)
             ->addColumn('action', 'admin.kabupaten.action')
             ->addIndexColumn()
+            ->rawColumns(['action'])
             ->toJson();
     }
-
-
 
     public function karyawan()
     {
         $karyawans = Karyawan::orderBy('nama', 'ASC');
-
         return datatables()->of($karyawans)
             ->editColumn(
                 'cover',

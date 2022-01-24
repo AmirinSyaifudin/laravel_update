@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Provinsi;
 use App\Kota;
+use DataTables;
 
 
 class KotaController extends Controller
@@ -20,6 +21,33 @@ class KotaController extends Controller
     {
         //
         return view('admin.kota.index');
+    }
+
+    public function dataKota()
+    {
+        // ->addColumn('action', 'admin.kota.action')
+        // $kotas = kota::orderBy('keterangan', 'ASC');
+        $kota = DB::table('kota')
+            ->join('provinsi', 'kota.provinsi_id', '=', 'provinsi.provinsi_id')
+            ->select(
+                'kota.nama_kota',
+                'kota.kode_pos',
+                'kota.keterangan',
+                'provinsi.nama_provinsi',
+            )
+            ->orderBy('kota.nama_kota', 'ASC')
+            ->get();
+
+        return datatables()->of($kota)
+            ->addColumn('action', function($row){
+                $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProvinsi">EDIT</a>';
+                $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProvinsi">DETELE</a>';
+                // $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Detail" class="btn btn-info btn-sm deleteProvinsi">DETAIL</a>';
+                return $btn;
+                })
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->toJson();
     }
 
     /**
@@ -40,18 +68,13 @@ class KotaController extends Controller
             'kota.keterangan',
         ])
         ->get();
-
         $provinsi = DB::table('provinsi')->get();
-
         $data = array(
             'kota'     => $kota,
             'provinsi'  =>$provinsi,
         );
-
         // dd($data);
-
-        return redirect('admin/kota', $data)
-        ->with('sukses','Data kota Berhasil di tambahkan !!! ');
+        return redirect('admin.kota.create', $data);
     }
 
     /**
@@ -62,25 +85,24 @@ class KotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    //
+        //'company'   => Company::orderBy('nama','ASC')->get(),
+        //$provinsi = DB::table('provinsi')->get();
+       
        DB::table('kota')
         ->insert([
-            'nama_kota'         => $request->nama_kota,
-            'kode_pos'          => $request->kode_pos,
-            'keterangan'        => $request->keterangan,
-            'nama_provinsi'     => $request->nama_provinsi,
+            'nama_kota'    => $request->nama_kota,
+            'kode_pos'     => $request->kode_pos,
+            'keterangan'   => $request->keterangan,
         ]);
-
-        // $provinsi = DB::table('provinsi')->get();
-
         // $data = array(
         //     'kota'     => $kota,
         //     'provinsi'  =>$provinsi,
-        // );s
-
+        // );
         // dd($data);
-
-        return redirect('admin/kota')
+        return redirect('admin/kota',[
+            'provinsi' => Provinsi::orderBy('nama_provinsi','ASC')->get(),
+        ])
         ->with('sukses','Data kota Berhasil di tambahkan !!! ');
     }
 
@@ -124,8 +146,13 @@ class KotaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($kota_id)
     {
-        //
+        DB::table('kota')
+        ->where('kota_id', $kota_id)
+        ->delete();
+
+        return redirect('admin/kota')
+        ->with(['info' => 'Data berhasil di Hapus !!']);
     }
 }

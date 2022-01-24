@@ -1,12 +1,16 @@
 <?php
 
+// use App\Http\Controllers\Admin\ProvinsiController;
+
 Route::get('/', 'HomeController@index')->name('dashboard');
 
 // DASHBOARD
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 
 //PROVINSI
-Route::get('/provinsi/data', 'DataController@provinsi')->name('provinsi.data');
+// Route::get('/provinsi/data', 'DataController@provinsi')->name('provinsi.data');
+Route::get('/provinsi/dataProvinsi', 'ProvinsiController@dataProvinsi')->name('provinsi.dataProvinsi');
+
 Route::get('/provinsi', 'ProvinsiController@index')->name('provinsi.index');
 Route::get('/provinsi/create', 'ProvinsiController@create')->name('provinsi.create');
 // Route::get('/provinsi', 'provinsiController@data')->name('provinsi.data');
@@ -16,8 +20,13 @@ Route::put('/provinsi/{provinsi}', 'ProvinsiController@update')->name('provinsi.
 Route::delete('/provinsi/{provinsi}', 'ProvinsiController@destroy')->name('provinsi.destroy');
 Route::get('/provinsi/{provinsi}/detail', 'ProvinsiController@detail')->name('provinsi.detail');
 
+// Route::resource('provinsi', ProvinsiController::class);
+
+
 //KOTA
-Route::get('/kota/data', 'DataController@kota')->name('kota.data');
+// Route::get('/kota/data', 'DataController@kota')->name('kota.data');
+Route::get('/kota/dataKota', 'KotaController@dataKota')->name('kota.dataKota');
+
 Route::get('/kota', 'KotaController@index')->name('kota.index');
 Route::get('/kota/create', 'KotaController@create')->name('kota.create');
 // Route::get('/kota', 'KotaController@data')->name('kota.data');
@@ -25,7 +34,7 @@ Route::post('/kota', 'KotaController@store')->name('kota.store');
 Route::get('/kota/{kota}/edit', 'KotaController@edit')->name('kota.edit');
 Route::put('/kota/{kota}', 'KotaController@update')->name('kota.update');
 Route::delete('/kota/{kota}', 'KotaController@destroy')->name('kota.destroy');
-Route::get('/kota/{kota}/detail', 'KotaController@detail')->name('kota.detail');
+// Route::get('/kota/{kota}/detail', 'KotaController@detail')->name('kota.detail');
 
 //KABUPATEN
 Route::get('/kabupaten/data', 'DataController@kabupaten')->name('kabupaten.data');

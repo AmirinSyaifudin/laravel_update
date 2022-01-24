@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Provinsi;
+use App\Kota;
+use App\Kabupaten;
+
 
 class KabupatenController extends Controller
 {
@@ -79,8 +84,14 @@ class KabupatenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($kabupaten_id)
     {
         //
+        DB::table('kabupaten')
+        ->where('kabupaten_id', $kabupaten_id)
+        ->first();
+
+        return redirect('admin/kabupaten')
+        ->with(['info' => 'Data berhasil di Hapus !!']);
     }
 }

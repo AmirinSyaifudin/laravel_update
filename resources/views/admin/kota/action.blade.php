@@ -4,12 +4,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
-
-<script>
-    
+<script>    
     $('button#delete').on('click', function(e){ 
         e.preventDefault(); 
-        
         var href = $(this).attr('href');
 
             // alert
