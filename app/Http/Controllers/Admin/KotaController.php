@@ -39,12 +39,13 @@ class KotaController extends Controller
             ->get();
 
         return datatables()->of($kota)
-            ->addColumn('action', function($row){
-                $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProvinsi">EDIT</a>';
-                $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProvinsi">DETELE</a>';
-                // $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Detail" class="btn btn-info btn-sm deleteProvinsi">DETAIL</a>';
-                return $btn;
-                })
+            // ->addColumn('action', function($row){
+            //     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProvinsi">EDIT</a>';
+            //     $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProvinsi">DETELE</a>';
+            //     // $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Detail" class="btn btn-info btn-sm deleteProvinsi">DETAIL</a>';
+            //     return $btn;
+            //     })
+            ->addColumn('action', 'admin.kota.action')
             ->addIndexColumn()
             ->rawColumns(['action'])
             ->toJson();

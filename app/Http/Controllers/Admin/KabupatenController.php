@@ -23,6 +23,26 @@ class KabupatenController extends Controller
         return view('admin.kabupaten.index');
     }
 
+    public function dataKabupaten()
+    {
+        $kabupaten = DB::table('kabupaten')
+        ->join('kota','kabupaten.kota_id','=','kota.kota_id')
+        ->join('provinsi','kabupaten.provinsi_id','=','provinsi.provinsi_id')
+        ->select(
+            'kabupaten.nama_kabupaten',
+            'kota.nama_kota',
+            'provinsi.nama_provinsi',
+        )
+        ->orderBy('kabupaten.nama_kabupaten','ASC')
+        ->get();
+
+        return datatables()->of($kabupaten)
+        ->addColumn('action','admin.kabupaten.action')
+        ->addIndexColumn()
+        ->rawColumns(['action'])
+        ->toJson();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

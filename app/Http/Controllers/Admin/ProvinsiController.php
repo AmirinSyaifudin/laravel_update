@@ -28,8 +28,10 @@ class ProvinsiController extends Controller
 
         return datatables()->of($provinsi)
             ->addColumn('action', function($row){
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProvinsi">EDIT</a>';
-                    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProvinsi">DETELE</a>';
+                    
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-provinsi_id="'.$row->provinsi_id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProvinsi">EDIT</a>';
+                    
+                    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-provinsi_id="'.$row->provinsi_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProvinsi">DETELE</a>';
                     // $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Detail" class="btn btn-info btn-sm deleteProvinsi">DETAIL</a>';
                     return $btn;
             })
@@ -66,24 +68,13 @@ class ProvinsiController extends Controller
     public function store(Request $request)
     {
         //
-        // Provinsi::updateOrCreate(['provinsi_id' => $request->provinsi_id],[
-        //         'nama_provinsi'         => $request->nama_provinsi, 
-        //         'tanggal_jadi-provinsi' => $request->tanggal_jadi_provinsi,
-        //         'keterangan'            => $request->keterangan,
-        //     ]);        
-   
-        // return response()->json(['sukses'=>'Book saved successfully.']);
+            Provinsi::updateOrCreate(['provinsi_id'   => $request->provinsi_id],
+                ['nama_provinsi'         => $request->nama_provinsi,
+                 'tanggal_jadi_provinsi' => $request->tanggal_jadi_provinsi,
+                 'keterangan'            => $request->keterangan
+                ]);
 
-        DB::table('provinsi')
-        ->insert([
-            'nama_provinsi'           => $request->nama_provinsi,
-            'tanggal_jadi_provinsi'   => $request->tanggal_jadi_provinsi,
-            'keterangan'              => $request->keterangan,
-        ]);
-        
-        return redirect('admin/provinsi')
-        ->with('sukses','Data Provinsi Berhasil diTambahkan !!!');
-    
+                return response()->json(['success' => 'Data Berhasil Di tambahkan !!!']);
     }
 
     /**
@@ -103,9 +94,11 @@ class ProvinsiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($provinsi_id)
     {
         //
+        $provinsi = Provinsi::find($provinsi_id);
+        return response()->json($provinsi);
     }
 
     /**
@@ -131,7 +124,7 @@ class ProvinsiController extends Controller
         //
         Provinsi::find($provinsi_id)->delete();
      
-        return response()->json(['success'=>'Book deleted successfully.']);
+        return response()->json(['success'=>'Provinsi deleted successfully.']);
 
     }
 }

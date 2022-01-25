@@ -114,6 +114,7 @@
     <script>
         $(function () {
             $('#dataTable').DataTable({
+                "pageLength": 50,
                 processing: true,
                 serverSide: true,
                 ajax: '{{ route('admin.kota.dataKota') }}',

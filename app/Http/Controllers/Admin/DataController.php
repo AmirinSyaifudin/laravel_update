@@ -50,28 +50,28 @@ class DataController extends Controller
     // }
 
     //KABUPATEN
-    public function kabupaten()
-    {
-        // $kabupatens = kabupaten::orderBy('keterangan', 'ASC');
-        $kabupaten = DB::table('kabupaten')
-            ->join('provinsi', 'kabupaten.provinsi_id', '=', 'provinsi.provinsi_id')
-            ->join('kota', 'kabupaten.kota_id', '=', 'kota.kota_id')
-            ->select(
-                'kabupaten.nama_kabupaten',
-                'kota.nama_kota',
-                'provinsi.nama_provinsi',
-                'kabupaten.kode_pos',
-                'kabupaten.keterangan',
-            )
-            ->orderBy('kabupaten.nama_kabupaten', 'ASC')
-            ->get();
+    // public function kabupaten()
+    // {
+    //     // $kabupatens = kabupaten::orderBy('keterangan', 'ASC');
+    //     $kabupaten = DB::table('kabupaten')
+    //         ->join('provinsi', 'kabupaten.provinsi_id', '=', 'provinsi.provinsi_id')
+    //         ->join('kota', 'kabupaten.kota_id', '=', 'kota.kota_id')
+    //         ->select(
+    //             'kabupaten.nama_kabupaten',
+    //             'kota.nama_kota',
+    //             'provinsi.nama_provinsi',
+    //             'kabupaten.kode_pos',
+    //             'kabupaten.keterangan',
+    //         )
+    //         ->orderBy('kabupaten.nama_kabupaten', 'ASC')
+    //         ->get();
 
-        return datatables()->of($kabupaten)
-            ->addColumn('action', 'admin.kabupaten.action')
-            ->addIndexColumn()
-            ->rawColumns(['action'])
-            ->toJson();
-    }
+    //     return datatables()->of($kabupaten)
+    //         ->addColumn('action', 'admin.kabupaten.action')
+    //         ->addIndexColumn()
+    //         ->rawColumns(['action'])
+    //         ->toJson();
+    // }
 
     public function karyawan()
     {

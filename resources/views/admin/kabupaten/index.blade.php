@@ -125,9 +125,10 @@
     <script>
         $(function () {
             $('#dataTable').DataTable({
+                "pageLength": 50,
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('admin.kabupaten.data') }}',
+                ajax: '{{ route('admin.kabupaten.dataKabupaten') }}',
                 columns: [
                     //{ data: 'id'},
                     { data: 'DT_RowIndex', orderable: false, searchable : false}, 

@@ -19,7 +19,6 @@ Route::get('/provinsi/{provinsi}/edit', 'ProvinsiController@edit')->name('provin
 Route::put('/provinsi/{provinsi}', 'ProvinsiController@update')->name('provinsi.update');
 Route::delete('/provinsi/{provinsi}', 'ProvinsiController@destroy')->name('provinsi.destroy');
 Route::get('/provinsi/{provinsi}/detail', 'ProvinsiController@detail')->name('provinsi.detail');
-
 // Route::resource('provinsi', ProvinsiController::class);
 
 
@@ -37,7 +36,9 @@ Route::delete('/kota/{kota}', 'KotaController@destroy')->name('kota.destroy');
 // Route::get('/kota/{kota}/detail', 'KotaController@detail')->name('kota.detail');
 
 //KABUPATEN
-Route::get('/kabupaten/data', 'DataController@kabupaten')->name('kabupaten.data');
+Route::get('/kabupaten/dataKabupaten', 'KabupatenController@dataKabupaten')->name('kabupaten.dataKabupaten');
+
+//Route::get('/kabupaten/data', 'DataController@kabupaten')->name('kabupaten.data');
 Route::get('/kabupaten', 'KabupatenController@index')->name('kabupaten.index');
 Route::get('/kabupaten/create', 'KabupatenController@create')->name('kabupaten.create');
 // Route::get('/kabupaten', 'KabupatenController@data')->name('kabupaten.data');
