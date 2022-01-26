@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\Admin\ProvinsiController;
 
 Route::get('/', 'HomeController@index')->name('dashboard');
@@ -8,7 +8,9 @@ Route::get('/', 'HomeController@index')->name('dashboard');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 
 //PROVINSI
-// Route::get('/provinsi/data', 'DataController@provinsi')->name('provinsi.data');
+// Route::resource('provinsi', ProvinsiController::class);
+
+Route::get('/provinsi/data', 'DataController@provinsi')->name('provinsi.data');
 Route::get('/provinsi/dataProvinsi', 'ProvinsiController@dataProvinsi')->name('provinsi.dataProvinsi');
 
 Route::get('/provinsi', 'ProvinsiController@index')->name('provinsi.index');
@@ -16,9 +18,10 @@ Route::get('/provinsi/create', 'ProvinsiController@create')->name('provinsi.crea
 // Route::get('/provinsi', 'provinsiController@data')->name('provinsi.data');
 Route::post('/provinsi', 'ProvinsiController@store')->name('provinsi.store');
 Route::get('/provinsi/{provinsi}/edit', 'ProvinsiController@edit')->name('provinsi.edit');
-Route::put('/provinsi/{provinsi}', 'ProvinsiController@update')->name('provinsi.update');
-Route::delete('/provinsi/{provinsi}', 'ProvinsiController@destroy')->name('provinsi.destroy');
+Route::put('/provinsi', 'ProvinsiController@update')->name('provinsi.update');
+Route::delete('/provinsi', 'ProvinsiController@destroy')->name('provinsi.destroy');
 Route::get('/provinsi/{provinsi}/detail', 'ProvinsiController@detail')->name('provinsi.detail');
+
 // Route::resource('provinsi', ProvinsiController::class);
 
 
