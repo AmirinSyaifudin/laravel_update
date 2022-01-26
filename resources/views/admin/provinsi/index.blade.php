@@ -272,7 +272,7 @@
                     dataType: 'json',
                     success: function (data) {
                         $('#ajaxModelEdit').modal('hide');
-                        $('#dataTable').DataTable().fnDestroy();
+                        // $('#dataTable').DataTable().fnDestroy();
 
                         //table.ajax.reload();
                         table.draw();
