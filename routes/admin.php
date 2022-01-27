@@ -22,9 +22,6 @@ Route::put('/provinsi', 'ProvinsiController@update')->name('provinsi.update');
 Route::delete('/provinsi', 'ProvinsiController@destroy')->name('provinsi.destroy');
 Route::get('/provinsi/{provinsi}/detail', 'ProvinsiController@detail')->name('provinsi.detail');
 
-// Route::resource('provinsi', ProvinsiController::class);
-
-
 //KOTA
 // Route::get('/kota/data', 'DataController@kota')->name('kota.data');
 Route::get('/kota/dataKota', 'KotaController@dataKota')->name('kota.dataKota');

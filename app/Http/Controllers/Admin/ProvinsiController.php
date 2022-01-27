@@ -19,8 +19,6 @@ class ProvinsiController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        // $provinsi = Provinsi::latest()->get();
         $provinsi = Provinsi::orderBy('nama_provinsi', 'ASC');
 
         if ($request->ajax()) {
@@ -68,19 +66,19 @@ class ProvinsiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create(Request $request)
-    // {
-    //     //
-    //     DB::table('provinsi')
-    //     ->insert([
-    //         'nama_provinsi'           => $request->nama_provinsi,
-    //         'tanggal_jadi_provinsi'   => $request->tanggal_jadi_provinsi,
-    //         'keterangan'              => $request->keterangan,
-    //     ]);
+    public function create(Request $request)
+    {
+        //
+        // DB::table('provinsi')
+        // ->insert([
+        //     'nama_provinsi'           => $request->nama_provinsi,
+        //     'tanggal_jadi_provinsi'   => $request->tanggal_jadi_provinsi,
+        //     'keterangan'              => $request->keterangan,
+        // ]);
 
-    //     return redirect('admin/provinsi')
-    //     ->with('sukses','Data Provinsi Berhasil diTambahkan !!!');
-    // }
+        // return redirect('admin/provinsi')
+        // ->with('sukses','Data Provinsi Berhasil diTambahkan !!!');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -106,10 +104,10 @@ class ProvinsiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function show($id)
-    // {
-    //     //
-    // }
+    public function show($id)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -161,26 +159,3 @@ class ProvinsiController extends Controller
 }
 
 
-// DB::table('provinsi')
-// ->where('provinsi_id', $provinsi_id)
-// ->delete();
-
-// return redirect('admin/provinsi')
-// ->with(['info' => 'Data berhasil di Hapus !!']);
-
-
-// public function store(Request $request)
-// {
-//     //
- 
-    
-//     DB::table('provinsi')
-//     ->insert([
-//         'nama_provinsi'           => $request->nama_provinsi,
-//         'tanggal_jadi_provinsi'   => $request->tanggal_jadi_provinsi,
-//         'keterangan'              => $request->keterangan,
-//     ]);
-    
-//     return redirect('admin/provinsi')
-//     ->with('sukses','Data Provinsi Berhasil diTambahkan !!!');
-// }

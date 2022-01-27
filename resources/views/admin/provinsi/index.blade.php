@@ -5,12 +5,10 @@
  <div class="box">
         <div class="box-header">
               <h3 class="box-title">DATA PENULIS</h3><br><br>
-              {{-- <button type="button" class="btn btn-primary" data-toggle="modal" 
-                      data-target="#exampleModal"><a>ADD DATA PROVINSI</a>
-              </button> --}}
+ 
+              <a class="btn btn-success" href="javascript:void(0)" id="createNewProvinsi">Tambah Data Provinsi</a>
               <a href="" class="btn btn-primary">Export Excel</a> 
               <a href="" class="btn btn-primary">Export PDF</a> 
-              <a class="btn btn-success" href="javascript:void(0)" id="createNewProvinsi">Tambah Data Provinsi</a>
          </div>
          <div class="box-body">
             <table id="dataTable" class="table table-bordered table-hover">
@@ -82,8 +80,7 @@
 </div>
         
 
-{{-- edit  --}}
-{{-- create ajax --}}
+{{-- editajax  --}}
 <div class="modal fade" id="ajaxModelEdit" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -151,146 +148,139 @@
     <!-- //jquery -->
     
 <script type="text/javascript">
-        $(function (){
+    $(function (){
 
             $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            //var datatable=()=>{
-                // Index
-                   var table = $('#dataTable').DataTable({
-                    "pageLength": 50,
-                    processing: true,
-                    serverSide: true,
-                    ajax: '{{ route('admin.provinsi.index') }}',
-                    columns: [
-                        {data: 'provinsi_id', name: 'provinsi_id'},
-                        {data: 'nama_provinsi', name: 'nama_provinsi'},
-                        {data: 'tanggal_jadi_provinsi', name: 'tanggal_jadi_provinsi'},
-                        {data: 'keterangan', name: 'keterangan'},
-                        {data: 'action', name: 'action', orderable: false, searchable: false},
-                    ]
-                }); 
-            //}
-
-           // datatable();
-
-                // create 
-                $('#createNewProvinsi').click(function () {
-                    $('#saveBtn').val("create-provinsi");
-                    $('#provinsi_id').val('');
-                    $('#provinsiForm').trigger("reset");
-                    $('#modelHeading').html("Create New Provinsi");
-                    $('#ajaxModel').modal('show');
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
                 });
 
-                //edit
-            //     $('body').on('click', '.editProvinsi', function () {
-            //     var provinsi_id = $(this).data('provinsi_id');
-            //     $.get("{{ route('admin.provinsi.index') }}" +'/' + provinsi_id +'/edit', function (data) {
-            //         $('#modelHeading').html("Edit Provinsi");
-            //         $('#saveBtn').val("edit-provinsi");
-            //         $('#ajaxModel').modal('show');
-            //         $('#provinsi_id').val(data.provinsi_id);
-            //         $('#nama_provinsi').val(data.nama_provinsi);
-            //         $('#tanggal_jadi_provinsi').val(data.tanggal_jadi_provinsi);
-            //         $('#keterangan').val(data.keterangan);
-            //     })
-            // });
+                    // Index
+                    var table = $('#dataTable').DataTable({
+                        // "pageLength": 50,
+                        processing: true,
+                        serverSide: true,
+                        ajax: '{{ route('admin.provinsi.index') }}',
+                        columns: [
+                            { data: 'DT_RowIndex', orderable: false, searchable : false}, 
+                            // {data: 'provinsi_id', name: 'provinsi_id'},
+                            {data: 'nama_provinsi', name: 'nama_provinsi'},
+                            {data: 'tanggal_jadi_provinsi', name: 'tanggal_jadi_provinsi'},
+                            {data: 'keterangan', name: 'keterangan'},
+                            {data: 'action', name: 'action', orderable: false, searchable: false},
+                        ]
+                    }); 
+            
+                    // create 
+                    $('#createNewProvinsi').click(function () {
+                        $('#saveBtn').val("create-provinsi");
+                        $('#provinsi_id').val('');
+                        $('#provinsiForm').trigger("reset");
+                        $('#modelHeading').html("Create New Provinsi");
+                        $('#ajaxModel').modal('show');
+                    });
 
-
-                //update
-                $('#saveBtn').click(function (e) {
-                    e.preventDefault();
-                    $(this).html('Save');
-                
-                    $.ajax({
-                        data: $('#provinsiForm').serialize(),
-                        url: "{{ route('admin.provinsi.store') }}",
-                        type: "POST",
-                        dataType: 'json',
-                        success: function (data) {
+                    //createupdate
+                    $('#saveBtn').click(function (e) {
+                        e.preventDefault();
+                        $(this).html('Save');
                     
-                            $('#provinsiForm').trigger("reset");
-                            $('#ajaxModel').modal('hide');
-                            table.draw();
+                        $.ajax({
+                            data: $('#provinsiForm').serialize(),
+                            url: "{{ route('admin.provinsi.store') }}",
+                            type: "POST",
+                            dataType: 'json',
+                            success: function (data) {
                         
+                                $('#provinsiForm').trigger("reset");
+                                $('#ajaxModel').modal('hide');
+                                table.draw();
+                            
+                            },
+                            error: function (data) {
+                                console.log('Error:', data);
+                                $('#saveBtn').html('Save Changes');
+                            }
+                        });
+                    });
+
+                    // edit
+                    $('body').on('click', '.edit', function () {
+                        $('#provinsi').val($(this).data('title'));
+                        $('#tanggal_jadi').val($(this).data('date'));
+                        $('#keterangan-edit').val($(this).data('keterangan'));
+                        $('#provinsi_id_edit').val($(this).data('id'));
+                        $('#ajaxModelEdit').modal('show');
+                        return false;
+                    });
+                    
+                    //updateprovinsiForm
+                    $('#updateprovinsiForm').submit(function (e) {
+                        e.preventDefault();
+                        //$(this).html('Save');
+                    
+                        $.ajax({
+                            data: $('#updateprovinsiForm').serialize(),
+                            url: "{{ route('admin.provinsi.update') }}",
+                            type: "POST",
+                            dataType: 'json',
+                            success: function (data) {
+                                $('#ajaxModelEdit').modal('hide');
+                                // $('#dataTable').DataTable().fnDestroy();
+                                //table.ajax.reload();
+                                table.draw();
+                            },
+                            error: function (data) {
+                                console.log('Error:', data);
+                                $('#updateprovinsiForm').html('Save Changes');
+                            }
+                        });
+                    });
+
+
+                    //delete
+                    $('body').on('click', '.deleteProvinsi', function () {
+                    
+                    var provinsi_id = $(this).data("provinsi_id");
+                    confirm("Yakin data ingin di hapus !!!");
+            
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ route('admin.provinsi.destroy') }}",
+                        data: {id:provinsi_id,_method:'delete'},
+                        function (data) {
+                            //table.draw();
+                            //console.log('kene');
+                            $('#dataTable').DataTable().fnDestroy();
+                            datatable();
                         },
                         error: function (data) {
                             console.log('Error:', data);
-                            $('#saveBtn').html('Save Changes');
                         }
                     });
+                    table.draw();
+
                 });
-
-
-             //delete
-             $('body').on('click', '.deleteProvinsi', function () {
-            
-                var provinsi_id = $(this).data("provinsi_id");
-                 confirm("Yakin data ingin di hapus !!!");
-        
-                $.ajax({
-                    type: "DELETE",
-                    url: "{{ route('admin.provinsi.destroy') }}",
-                    data: {id:provinsi_id,_method:'delete'},
-                    function (data) {
-                        //table.draw();
-                        //console.log('kene');
-                        $('#dataTable').DataTable().fnDestroy();
-                        datatable();
-                    },
-                    error: function (data) {
-                        console.log('Error:', data);
-                    }
-                });
-                table.draw();
-
-            });
-
-
-            $('body').on('click', '.edit', function () {
-                $('#provinsi').val($(this).data('title'));
-                $('#tanggal_jadi').val($(this).data('date'));
-                $('#keterangan-edit').val($(this).data('keterangan'));
-                $('#provinsi_id_edit').val($(this).data('id'));
-                $('#ajaxModelEdit').modal('show');
-                return false;
-            });
-            //updateprovinsiForm
-            $('#updateprovinsiForm').submit(function (e) {
-                e.preventDefault();
-                //$(this).html('Save');
-            
-                $.ajax({
-                    data: $('#updateprovinsiForm').serialize(),
-                    url: "{{ route('admin.provinsi.update') }}",
-                    type: "POST",
-                    dataType: 'json',
-                    success: function (data) {
-                        $('#ajaxModelEdit').modal('hide');
-                        // $('#dataTable').DataTable().fnDestroy();
-
-                        //table.ajax.reload();
-                        table.draw();
-                    
-                    },
-                    error: function (data) {
-                        console.log('Error:', data);
-                        $('#updateprovinsiForm').html('Save Changes');
-                    }
-                });
-            });
-}); 
+        }); 
 
 </script>
 @endpush
 
 
-
+                {{-- edit
+                    $('body').on('click', '.editProvinsi', function () {
+                    var provinsi_id = $(this).data('provinsi_id');
+                    $.get("{{ route('admin.provinsi.index') }}" +'/' + provinsi_id +'/edit', function (data) {
+                        $('#modelHeading').html("Edit Provinsi");
+                        $('#saveBtn').val("edit-provinsi");
+                        $('#ajaxModel').modal('show');
+                        $('#provinsi_id').val(data.provinsi_id);
+                        $('#nama_provinsi').val(data.nama_provinsi);
+                        $('#tanggal_jadi_provinsi').val(data.tanggal_jadi_provinsi);
+                        $('#keterangan').val(data.keterangan);
+                    })
+                }); --}}
 
 
 
