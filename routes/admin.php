@@ -10,8 +10,8 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 //PROVINSI
 // Route::resource('provinsi', ProvinsiController::class);
 
-Route::get('/provinsi/data', 'DataController@provinsi')->name('provinsi.data');
-Route::get('/provinsi/dataProvinsi', 'ProvinsiController@dataProvinsi')->name('provinsi.dataProvinsi');
+// Route::get('/provinsi/data', 'DataController@provinsi')->name('provinsi.data');
+// Route::get('/provinsi/dataProvinsi', 'ProvinsiController@dataProvinsi')->name('provinsi.dataProvinsi');
 
 Route::get('/provinsi', 'ProvinsiController@index')->name('provinsi.index');
 Route::get('/provinsi/create', 'ProvinsiController@create')->name('provinsi.create');
@@ -24,7 +24,7 @@ Route::get('/provinsi/{provinsi}/detail', 'ProvinsiController@detail')->name('pr
 
 //KOTA
 // Route::get('/kota/data', 'DataController@kota')->name('kota.data');
-Route::get('/kota/dataKota', 'KotaController@dataKota')->name('kota.dataKota');
+// Route::get('/kota/dataKota', 'KotaController@dataKota')->name('kota.dataKota');
 
 Route::get('/kota', 'KotaController@index')->name('kota.index');
 Route::get('/kota/create', 'KotaController@create')->name('kota.create');
@@ -36,7 +36,8 @@ Route::delete('/kota/{kota}', 'KotaController@destroy')->name('kota.destroy');
 // Route::get('/kota/{kota}/detail', 'KotaController@detail')->name('kota.detail');
 
 //KABUPATEN
-Route::get('/kabupaten/dataKabupaten', 'KabupatenController@dataKabupaten')->name('kabupaten.dataKabupaten');
+// Route::get('/kabupaten/data', 'DataController@kabupaten')->name('kabupaten.data');
+// Route::get('/kabupaten/dataKabupaten', 'KabupatenController@dataKabupaten')->name('kabupaten.dataKabupaten');
 
 //Route::get('/kabupaten/data', 'DataController@kabupaten')->name('kabupaten.data');
 Route::get('/kabupaten', 'KabupatenController@index')->name('kabupaten.index');

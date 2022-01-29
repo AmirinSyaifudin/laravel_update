@@ -8,6 +8,6 @@ class Kota extends Model
 {
     //
     public $guarded = [];
-
+    protected $primaryKey = 'kota_id ';
     public $table   = 'kota';
 }

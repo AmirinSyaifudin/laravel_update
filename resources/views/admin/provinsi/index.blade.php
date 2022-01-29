@@ -185,24 +185,21 @@
                     $('#saveBtn').click(function (e) {
                         e.preventDefault();
                         $(this).html('Save');
-                    
-                        $.ajax({
-                            data: $('#provinsiForm').serialize(),
-                            url: "{{ route('admin.provinsi.store') }}",
-                            type: "POST",
-                            dataType: 'json',
-                            success: function (data) {
-                        
-                                $('#provinsiForm').trigger("reset");
-                                $('#ajaxModel').modal('hide');
-                                table.draw();
-                            
-                            },
-                            error: function (data) {
-                                console.log('Error:', data);
-                                $('#saveBtn').html('Save Changes');
-                            }
-                        });
+                            $.ajax({
+                                data: $('#provinsiForm').serialize(),
+                                url: "{{ route('admin.provinsi.store') }}",
+                                type: "POST",
+                                dataType: 'json',
+                                success: function (data) {
+                                    $('#provinsiForm').trigger("reset");
+                                    $('#ajaxModel').modal('hide');
+                                    table.draw();
+                                },
+                                error: function (data) {
+                                    console.log('Error:', data);
+                                    $('#saveBtn').html('Save Changes');
+                                }
+                            });
                     });
 
                     // edit
@@ -219,69 +216,48 @@
                     $('#updateprovinsiForm').submit(function (e) {
                         e.preventDefault();
                         //$(this).html('Save');
-                    
-                        $.ajax({
-                            data: $('#updateprovinsiForm').serialize(),
-                            url: "{{ route('admin.provinsi.update') }}",
-                            type: "POST",
-                            dataType: 'json',
-                            success: function (data) {
-                                $('#ajaxModelEdit').modal('hide');
-                                // $('#dataTable').DataTable().fnDestroy();
-                                //table.ajax.reload();
-                                table.draw();
-                            },
-                            error: function (data) {
-                                console.log('Error:', data);
-                                $('#updateprovinsiForm').html('Save Changes');
-                            }
-                        });
+                            $.ajax({
+                                data: $('#updateprovinsiForm').serialize(),
+                                url: "{{ route('admin.provinsi.update') }}",
+                                type: "POST",
+                                dataType: 'json',
+                                success: function (data) {
+                                    $('#ajaxModelEdit').modal('hide');
+                                    // $('#dataTable').DataTable().fnDestroy();
+                                    //table.ajax.reload();
+                                    table.draw();
+                                },
+                                error: function (data) {
+                                    console.log('Error:', data);
+                                    $('#updateprovinsiForm').html('Save Changes');
+                                }
+                            });
                     });
-
 
                     //delete
                     $('body').on('click', '.deleteProvinsi', function () {
-                    
-                    var provinsi_id = $(this).data("provinsi_id");
-                    confirm("Yakin data ingin di hapus !!!");
-            
-                    $.ajax({
-                        type: "DELETE",
-                        url: "{{ route('admin.provinsi.destroy') }}",
-                        data: {id:provinsi_id,_method:'delete'},
-                        function (data) {
-                            //table.draw();
-                            //console.log('kene');
-                            $('#dataTable').DataTable().fnDestroy();
-                            datatable();
-                        },
-                        error: function (data) {
-                            console.log('Error:', data);
-                        }
-                    });
-                    table.draw();
-
-                });
+                        var provinsi_id = $(this).data("provinsi_id");
+                        confirm("Yakin data ingin di hapus !!!");
+                            $.ajax({
+                                type: "DELETE",
+                                url: "{{ route('admin.provinsi.destroy') }}",
+                                data: {id:provinsi_id,_method:'delete'},
+                                function (data) {
+                                    //table.draw();
+                                    //console.log('kene');
+                                    $('#dataTable').DataTable().fnDestroy();
+                                    datatable();
+                                },
+                                error: function (data) {
+                                    console.log('Error:', data);
+                                }
+                            });
+                            table.draw();
+                        });
         }); 
 
 </script>
 @endpush
-
-
-                {{-- edit
-                    $('body').on('click', '.editProvinsi', function () {
-                    var provinsi_id = $(this).data('provinsi_id');
-                    $.get("{{ route('admin.provinsi.index') }}" +'/' + provinsi_id +'/edit', function (data) {
-                        $('#modelHeading').html("Edit Provinsi");
-                        $('#saveBtn').val("edit-provinsi");
-                        $('#ajaxModel').modal('show');
-                        $('#provinsi_id').val(data.provinsi_id);
-                        $('#nama_provinsi').val(data.nama_provinsi);
-                        $('#tanggal_jadi_provinsi').val(data.tanggal_jadi_provinsi);
-                        $('#keterangan').val(data.keterangan);
-                    })
-                }); --}}
-
 
 
 
