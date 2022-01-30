@@ -52,33 +52,7 @@ class KotaController extends Controller
         //return view('admin.kota.index');
     }
 
-    // public function dataKota()
-    // {
-    //     // ->addColumn('action', 'admin.kota.action')
-    //     // $kotas = kota::orderBy('keterangan', 'ASC');
-    //     $kota = DB::table('kota')
-    //         ->join('provinsi', 'kota.provinsi_id', '=', 'provinsi.provinsi_id')
-    //         ->select(
-    //             'kota.nama_kota',
-    //             'kota.kode_pos',
-    //             'kota.keterangan',
-    //             'provinsi.nama_provinsi',
-    //         )
-    //         ->orderBy('kota.nama_kota', 'ASC')
-    //         ->get();
 
-    //     return datatables()->of($kota)
-    //         // ->addColumn('action', function($row){
-    //         //     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProvinsi">EDIT</a>';
-    //         //     $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProvinsi">DETELE</a>';
-    //         //     // $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Detail" class="btn btn-info btn-sm deleteProvinsi">DETAIL</a>';
-    //         //     return $btn;
-    //         //     })
-    //         ->addColumn('action', 'admin.kota.action')
-    //         ->addIndexColumn()
-    //         ->rawColumns(['action'])
-    //         ->toJson();
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -175,8 +149,7 @@ class KotaController extends Controller
         ->where('kota_id', $kota_id)
         ->delete();
 
-        return redirect('admin/kota')
-        ->with(['info' => 'Data berhasil di Hapus !!']);
+        return response()->json(['success'  => 'Data Kota berhasil di hapus !!!']);
     }
 }
 
@@ -205,3 +178,15 @@ class KotaController extends Controller
 //     ])
 //     ->with('sukses','Data kota Berhasil di tambahkan !!! ');
 // }
+
+
+
+// public function destroy($kota_id)
+//     {
+//         DB::table('kota')
+//         ->where('kota_id', $kota_id)
+//         ->delete();
+
+//         return redirect('admin/kota')
+//         ->with(['info' => 'Data berhasil di Hapus !!']);
+//     }

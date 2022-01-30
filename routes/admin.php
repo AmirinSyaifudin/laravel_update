@@ -31,8 +31,8 @@ Route::get('/kota/create', 'KotaController@create')->name('kota.create');
 // Route::get('/kota', 'KotaController@data')->name('kota.data');
 Route::post('/kota', 'KotaController@store')->name('kota.store');
 Route::get('/kota/{kota}/edit', 'KotaController@edit')->name('kota.edit');
-Route::put('/kota/{kota}', 'KotaController@update')->name('kota.update');
-Route::delete('/kota/{kota}', 'KotaController@destroy')->name('kota.destroy');
+Route::put('/kota', 'KotaController@update')->name('kota.update');
+Route::delete('/kota', 'KotaController@destroy')->name('kota.destroy');
 // Route::get('/kota/{kota}/detail', 'KotaController@detail')->name('kota.detail');
 
 //KABUPATEN
@@ -57,8 +57,8 @@ Route::get('/karyawan/create', 'KaryawanController@create')->name('karyawan.crea
 Route::post('/karyawan', 'KaryawanController@store')->name('karyawan.store');
 Route::get('/karyawan/{karyawan}/edit', 'KaryawanController@edit')->name('karyawan.edit');
 // Route::get('/karyawan/edit/{$id}', 'karyawanController@edit')->name('karyawan.edit');
-Route::put('/karyawan/{karyawan}', 'KaryawanController@update')->name('karyawan.update');
-Route::delete('/karyawan/{karyawan}', 'KaryawanController@destroy')->name('karyawan.destroy');
+Route::put('/karyawan', 'KaryawanController@update')->name('karyawan.update');
+Route::delete('/karyawan', 'KaryawanController@destroy')->name('karyawan.destroy');
 Route::get('/karyawan/{karyawan}/detail', 'KaryawanController@detail')->name('karyawan.detail');
 
 //cuti

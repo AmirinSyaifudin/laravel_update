@@ -201,21 +201,3 @@ class ParkirController extends Controller
     }
 }
 
-
-
-
-// $parkir = DB::table('parkir')->get();
-// $tanggal = Carbon::now()->format('Y-m-d');
-
-// $now = Carbon::now();
-
-// $thnBln = $now->year . $now->month;
-// $cek = Parkir::count();
-// if ($cek == 0) {
-//     $urut       = 100001;
-//     $nomer      = 'MTR-' . $thnBln . $urut;
-// } else {
-//     $ambil      = Parkir::all()->last();
-//     $urut       = (int)substr($ambil->no_parkir, -6) + 1;
-//     $nomer      = 'MTR-' . $thnBln . $urut;
-// }

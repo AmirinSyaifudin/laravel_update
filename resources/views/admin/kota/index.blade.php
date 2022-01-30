@@ -24,10 +24,6 @@
                         </tr>
                     </thead>
                     {{-- <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
                     </tbody> --}}
             </table>
         </div>
@@ -67,7 +63,7 @@
                         <div class="col-sm-10">
                           {{-- <input name="jenis_pasien_id" class="form-control" id="inputPassword3" placeholder=""> --}}
                         
-                          <select name="provinsi_id" id="" class="form-control select2">
+                          <select name="provinsi" id="provinsi" class="form-control select2">
                             {{-- @foreach ($provinsi as $p)
                                    <option value="{{ $p->provinsi_id}}">{{ $p->nama_provinsi}}</option>
                             @endforeach --}}
@@ -181,11 +177,6 @@
     </div>
 </div>
 
- <form action="" method="post" id="deleteForm">
-    @csrf
-    @method("DELETE")
-    <input type="submit" value="Hapus" style="display:none">
-</form>
 @endsection
 
 @push('styles')
@@ -256,18 +247,38 @@
                                 }
                             });
                         });
-
-                        // $('#nama_provinsi').val($(this).data('nama_provinsi'));
-                        // $('#kode_pos').val($(this).data('kode_pos'));
-
-                        //edit
+ 
+                       //edit
                         $('body').on('click', '.edit', function () {
-                        $('#kota').val($(this).data('title'));
-                        $('#keterangan-edit').val($(this).data('keterangan'));
-                        $('#kota_id_edit').val($(this).data('id'));
-                        $('#ajaxModelEdit').modal('show');
-                        return false;
-                    });
+                            $('#kota').val($(this).data('title'));
+                            $('#keterangan-edit').val($(this).data('keterangan'));
+                            $('#kota_id_edit').val($(this).data('id'));
+                            $('#ajaxModelEdit').modal('show');
+                            return false;
+                        });
+
+
+
+                        //delete
+                        $('body').on('click', '.deleteKota', function () {
+                            var kota_id = $(this).data("kota_id");
+                            confirm("Yakin data ingin di hapus !!!");
+                                $.ajax({
+                                    type: "DELETE",
+                                    url: "{{ route('admin.kota.destroy') }}",
+                                    data: {id:provinsi_id,_method:'delete'},
+                                    function (data) {
+                                        //table.draw();
+                                        //console.log('kene');
+                                        $('#dataTable').DataTable().fnDestroy();
+                                        datatable();
+                                    },
+                                    error: function (data) {
+                                        console.log('Error:', data);
+                                    }
+                                });
+                                table.draw();
+                        });
                                            
             }); 
     

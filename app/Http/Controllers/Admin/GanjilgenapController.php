@@ -42,44 +42,35 @@ class GanjilgenapController extends Controller
      */
     public function store(Request $request)
     {
-        //cek kondisi validasi form 
-        //if (isset($_POST['napol'])) {
-        // cek kondisi tanggal ganil genap 
-
         $napol = $request->napol;
         if (date('d') % 2 == 0) {
-            $cek = 'genap';
-        } else {
-            $cek = 'ganjil';
-        }
+                $cek = 'genap';
+            } else {
+                $cek = 'ganjil';
+            }
 
         //identifikasi karakter tidak boleh menggunakan spasi
         if (strpos($_POST['napol'], ' ') !== false) {
-            // echo 'TIDAK BOLEH MENGGUNAKAN SPASI KAMPRET';
-            return redirect('admin/ganjilgenap')
-                ->with(['info' => 'SISTEM MENOLAK, JANCUK TIDAK BOLEH MENGGUNAKAN SPASI !!! HAHAHA']);
-        } else {
-            $napol = preg_replace('/([^0-9]+)/', '', $_POST['napol']);
+                // echo 'TIDAK BOLEH MENGGUNAKAN SPASI KAMPRET';
+                return redirect('admin/ganjilgenap')
+                    ->with(['info' => 'SISTEM MENOLAK, JANCUK TIDAK BOLEH MENGGUNAKAN SPASI !!! HAHAHA']);
+                 } else {
+                        $napol = preg_replace('/([^0-9]+)/', '', $_POST['napol']);
 
-            // cek kondisi napol ganjil atau genap
-            if ($napol % 2 == 0) {
-                $ceknapol = 'genap';
-            } else {
-                $ceknapol = 'ganjil';
-            }
+                        // cek kondisi napol ganjil atau genap
+                        if ($napol % 2 == 0) {
+                                $ceknapol = 'genap';
+                            } else {
+                                $ceknapol = 'ganjil';
+                            }
 
-            // cek kondisi kena tilang atau tidak 
-            if ($cek != $ceknapol) {
-                $status = 'Anda Kena Tilang Rp.1.000.000';
-            } else {
-                $status = 'Silahkan Lanjut Perjalanan Pak Haji';
-            }
-        }
-
-        // }
-        // $tanggal_mulai = Carbon::now()->format('Y-m-d');
-        // // membuat no otomatis , tahun, bulan , no urut NT2021410000001 
-        // $now = Carbon::now();
+                            // cek kondisi kena tilang atau tidak 
+                            if ($cek != $ceknapol) {
+                                    $status = 'Anda Kena Tilang Rp.1.000.000';
+                                } else {
+                                    $status = 'Silahkan Lanjut Perjalanan Pak Haji';
+                                }
+                    }
 
         DB::table('ganjilgenap')
             ->insert([

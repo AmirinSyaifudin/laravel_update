@@ -2,9 +2,6 @@
 @section('content')
 <h1> ISENG SISTEM MANAGEMEN PARKIR</h1>
 
-
-
-
 <!-- /.box-header -->
 <div class="box" >
     <div class="box-header" >
@@ -26,27 +23,7 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group" @error('created_at') has-error @enderror">
-                            <label for="inputPassword3" class="col-sm-2 control-label">JAM & TANGGAL </label>
-                                <div class="col-sm-10">
-                                    <input type="created_at" name="created_at" id="demo" class="form-control" id="inputPassword3" 
-                                    value="{{ date('H:i:s | D-d-M-Y') }} "
-                                    placeholder="H:i:s |D-d-M-Y" readonly>
-                                    @error('created_at')
-                                        <span class="help-block">{{ $message}}</span>
-                                    @enderror
-                            </div>
-                        </div> --}}
-
-                        {{-- <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">JAM </label>
-                                <div class="col-sm-10">
-                                    <input  id="demo"  class="form-control" id="inputPassword3" 
-                                    value=""
-                                     readonly>
-                                   
-                            </div>
-                        </div> --}}
+                    
                         <div class="form-group" @error('tanggal_jam_masuk') has-error @enderror">
                             <label for="inputPassword3" class="col-sm-2 control-label">JAM MASUK </label>
                                 <div class="col-sm-10">
@@ -129,19 +106,15 @@
                         <tr>
                             {{-- <button type="button" class="btn btn-block btn-primary btn-sm">Primary</button> --}}
                             <td width='5'>  {{ $loop-> index +1 }} </td>
-                            
                             <td width='20'> {{ $jangkrik->no_parkir }}</td>
                             <td width='20'> {{ $jangkrik->napol }}</td>
                             {{-- <td width='30'>  {{ date('H:i:s | l-d-M-Y',strtotime($jangkrik->created_at)) }}</td> --}}
                             <td width='30'>  {{ date('H:i:s | l-d-M-Y',strtotime($jangkrik->tanggal_jam_masuk)) }}</td> 
-
                             {{-- <td width='30'>{{ $jangkrik->created_at }}</td> --}}
                             <td width='20'> {{ $jangkrik->jenis_kendaraan }}</td>
                             <td width='20'>{{ $jangkrik->tarif_perjam }} </td>
-                  
-                            <td width='20'><a   class="btn btn-warning"> {{ $jangkrik->status }}</a> </td>
-                  
-                            <td width='5'>  <a href="{{ route('admin.parkir.checkout', $jangkrik->parkir_id) }}" class="btn btn-info">CHECK OUT</a></td>
+                            <td width='20'><a class="btn btn-warning"> {{ $jangkrik->status }}</a> </td>
+                            <td width='5'><a href="{{ route('admin.parkir.checkout', $jangkrik->parkir_id) }}" class="btn btn-info">CHECK OUT</a></td>
                             <td width='5'>
                                 <form action="{{ route('admin.parkir.destroy', $jangkrik->parkir_id) }}" method="post" style="display:inline;">
                                     {{ csrf_field() }}

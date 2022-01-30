@@ -8,35 +8,12 @@
         <center> <h3 class="box-title" style="text-transform: uppercase;">Silahkan input data </h3><br><br> </center>
         <form action="{{ route('admin.ganjilgenap.store') }}"  method="POST" enctype="multipart/form-data" class="form-horizontal" style="max-width:500px">
             @csrf
-            {{-- <div class="form-group" @error('tanggal_mulai') has-error @enderror">
-                <label for="inputPassword3" class="col-sm-2 control-label">JAM & TANGGAL </label>
-                    <div class="col-sm-10">
-                        <input type="tanggal_mulai" name="tanggal_mulai" class="form-control" id="inputPassword3" 
-                        value="{{ date('H:i:s | D-d-M-Y') }} "
-                        placeholder="H:i:s |D-d-M-Y" readonly>
-                        @error('tanggal_mulai')
-                            <span class="help-block">{{ $message}}</span>
-                        @enderror
-                </div>
-            </div> --}}
-
-            {{-- <div class="form-group" @error('created_at') has-error @enderror">
-                <label for="inputPassword3" class="col-sm-2 control-label">JAM & TANGGAL </label>
-                    <div class="col-sm-10">
-                        <input type="created_at" name="created_at" class="form-control" id="inputPassword3" 
-                        value="{{ date('H:i:s | D-d-M-Y') }} "
-                        placeholder="H:i:s |D-d-M-Y" readonly>
-                        @error('created_at')
-                            <span class="help-block">{{ $message}}</span>
-                        @enderror
-                </div>
-            </div> --}}
-
+    
             <div class="form-group" @error('napol') has-error @enderror">
-                <label for="inputEmail3" class="col-sm-2 control-label">NAPOL</label>
+                <label for="inputEmail3" class="col-sm-2 control-label">NAPOL = </label>
                     <div class="col-sm-10">
                         <input type="text" name="napol" class="form-control" id="inputEmail3" 
-                        value="{{ old('napol') }}" placeholder="Isi data napol">
+                        value="{{ old('napol') }}" placeholder="Silahkan masukkan Napol tanggal menggunakan spasi !!!">
                         @error('napol')
                             <span class="help-block">{{ $message}}</span>
                         @enderror
@@ -46,12 +23,11 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <tr>
-                        <td><input type="submit" class="btn btn-primary" value="Tambah"></td>
+                        <td><input type="submit" class="btn btn-primary" value="SIMPAN"></td>
                         <td><input type="reset" name="batal" class="btn btn-warning" value="Reset"></td>
                     </tr>
                 </div>
             </div> 
-
         </form>
         </div>
         
@@ -59,7 +35,7 @@
                 <hr>
                 <center>  <h4 style="text-transform: uppercase;"> Menampilkan Data Berdasarkan Tahun & Tanggal</h4> </center>
                 {{-- <h5 class="box-title">MENAMPILKAN DATA BERDASARKAN TANGGAL</h5><br><br> --}}
-                {{-- <div class="form-group">
+                <div class="form-group">
                     <div class="col-md-4 mb-3" align="center" style="color: red;">
                       <label for="validationCustom03">TANGGAL MASUK</label>
                       <input type="date" name="tanggal" class="form-control" 
@@ -101,7 +77,10 @@
                         </div>
                     </div>
                   </div>
-                </div> --}}
+                </div>
+
+                <hr>
+
                 <table id="dataTable" class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -132,7 +111,9 @@
                             @endforeach
                         </tbody>
                 </table>
-    </div>
+            </div>
+</div>
+
 @endsection
 
 @push('scripts')

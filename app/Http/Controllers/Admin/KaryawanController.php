@@ -17,12 +17,32 @@ class KaryawanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return view('admin.karyawan.index', [
-            'nama' => 'Nama Karyawan'
-        ]);
+        $karyawan = Karyawan::orderBy('nama', 'ASC');
+
+        if ($request->ajax()) {
+            $data = Karyawan::latest()->get();
+           return datatables::of($karyawan)
+           ->addIndexColumn()
+           ->addColumn('action', function($row){
+                   
+                   $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->karyawan_id.'" data-title="'.$row->no_induk.'" data-title="'.$row->nama.'"  data-alamat="'.$row->alamat.'" data-date="'.$row->tanggal_lahir.'" data-date="'.$row->tanggal_bergabung.'"  data-original-title="Edit" class="edit btn btn-primary btn-sm editProvinsi">EDIT</a>';
+                   
+                   $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-karyawan_id="'.$row->karyawan_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteKaryawan">DETELE</a>';
+                   
+                   return $btn;  
+           })
+           ->rawColumns(['action'])
+           ->make(true);
+       }
+
+       return view('admin.karyawan.index', compact('karyawan'));
+
+        // return view('admin.karyawan.index', [
+        //     'nama' => 'Nama Karyawan'
+        // ]);
     }
 
 
@@ -46,14 +66,14 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'no_induk'          => 'required|unique:karyawan',
-            'nama'              => 'required',
-            'alamat'            => 'required',
-            'tanggal_lahir'     => 'required',
-            'tanggal_bergabung' => 'required',
-            'cover'             => 'file|image',
-        ]);
+        // $this->validate($request, [
+        //     'no_induk'          => 'required|unique:karyawan',
+        //     'nama'              => 'required',
+        //     'alamat'            => 'required',
+        //     'tanggal_lahir'     => 'required',
+        //     'tanggal_bergabung' => 'required',
+        //     'cover'             => 'file|image',
+        // ]);
 
         $cover = null;
 
@@ -62,18 +82,17 @@ class KaryawanController extends Controller
             $cover = $request->file('cover')->store('assets/covers');
         }
 
-        DB::table('karyawan')
-            ->insert([
-                'no_induk'          => $request->no_induk,
-                'nama'              => $request->nama,
-                'alamat'            => $request->alamat,
-                'tanggal_lahir'     => $request->tanggal_lahir,
-                'tanggal_bergabung' => $request->tanggal_bergabung,
-                'cover'             => $cover,
-            ]);
+       Karyawan::updateOrCreate(['karyawan_id' => $request->karyawan_id],
+       [
+        'no_induk'              => $request->no_induk,
+        'nama'                  => $request->nama,
+        'cover'                 => $request->cover,
+        'alamat'                => $request->alamat,
+        'tanggal_lahir'         => $request->tanggal_lahir,
+        'tanggal_bergabung'     => $request->tanggal_bergabung,
+       ]);
 
-        return redirect('admin/karyawan')
-            ->with('sukses', 'Data Berhasil Di tambahkan !!!');
+       return response()->json(['success'  => 'Karyawan berhasil di tambhakan !!!']);
     }
 
     /**
@@ -100,18 +119,11 @@ class KaryawanController extends Controller
         $karyawan = DB::table('karyawan')
             ->where('karyawan_id', $karyawan_id)
             ->first();
-        //dd($karyawan_id);
+       
+        return response()->json($karyawan);
+        // return view('admin.karyawan.edit', compact('karyawan'));
 
-        return view('admin.karyawan.edit', compact('karyawan'));
-
-        // return view('admin.karyawan.edit', [
-        //     'karyawan'  => $karyawan,
-        // ]);
-
-        // return view('admin.karyawan.edit', [
-        //     //'no_induk'  => 'Edit Data Karyawan',
-        //     'karyawan'  => $karyawan,
-        // ]);
+        
     }
 
     /**
@@ -132,19 +144,18 @@ class KaryawanController extends Controller
         //     'tanggal_bergabung' => 'required',
 
         // ]);
-
-        DB::table('karyawan')
-            ->where('karyawan_id', $request->karyawan_id)
+            DB::table('karyawan')
+            ->where('karyawan_id', $request->id)
             ->update([
                 'no_induk'          => $request->no_induk,
                 'nama'              => $request->nama,
                 'alamat'            => $request->alamat,
                 'tanggal_lahir'     => $request->tanggal_lahir,
-                'tanggal_bergabung' => $request->tanggal_bergabung
-
+                'tanggal_bergabung' => $request->tanggal_bergabung,
             ]);
-        return redirect('admin/karyawan')
-            ->with('info', 'Data Berhasil Di Update !!! ');
+
+            return response()->json(['success' => 'Karyawan Berhasil di Update !!!']);
+      
     }
 
     /**
@@ -153,46 +164,23 @@ class KaryawanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($karyawan_id)
+    public function destroy(Request $request)
     {
-        DB::table('karyawan')
-            ->where('karyawan_id', $karyawan_id)
-            ->delete();
-        // $karyawan->delete();
-        return redirect('admin/karyawan')
-            ->with(['info' => 'Data Berhasil di Hapus']);
+        //
+            Karyawan::where('karyawan_id',$request->id)->delete(); 
+
+            return response()->json(['success' => 'Karyawan berhasil di hapus !!!']);
     }
 
-    public function detail($karyawan_id)
+    public function detail(Request $request, $karyawan_id)
     {
-        $karyawan = DB::table('karyawan')
-            ->where('karyawan_id', $karyawan_id)
-            ->first();
+        // $karyawan = DB::table('karyawan')
+        //     ->where('karyawan_id', $karyawan_id)
+        //     ->first();
 
-        $data = array(
-            'karyawan'   => $karyawan
-        );
-        return view('admin.karyawan.detail', $data);
+        Karyawan::where('karyawan_id',$request->id)->delete(); 
+
+       return response()->json()(['success' => 'Karyawan berhasil di hapus !!!']);
     }
 }
 
-
-
-
-
-    // public function GETdata(Request $request)
-    // {
-    //     $query = DB::table('karyawan')->get();
-
-    //     // return DataTables::of($query)
-    //     //     ->addColumn('action', 'admin.karyawan.action')
-    //     //     ->addIndexColumn() // tambah colom
-    //     //     ->rawColumns(['action'])
-    //     //     ->toJson();
-
-    //     return datatables()->of($query)
-    //         ->addColumn('action', 'admin.karyawan.action')
-    //         ->addIndexColumn() // tambah colom
-    //         ->rawColumns(['action'])
-    //         ->toJson();
-    // }
