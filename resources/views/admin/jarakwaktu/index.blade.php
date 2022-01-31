@@ -128,7 +128,9 @@ date_default_timezone_set('Asia/Jakarta');
                         @foreach ($jarakwaktu as $wedus)
                             <tr>
                                 <td width='5'>  {{ $loop-> index +1 }} </td>
+                                {{-- <td scope="row"> {{ tanggal_indonesia($wedus->created_at)}} </td> --}}
                                 <td width='30'>  {{ date('H:i:s | l-d-M-Y',strtotime($wedus->created_at)) }}</td>
+                                {{-- <td width='30'>  {{ date('H:i:s | l-d-M-Y',strtotime($wedus->created_at)) }}</td> --}}
                                 {{-- <td width='20'> {{ date('H:i:s',strtotime($wedus->created_at)) }}</td> --}}
                                 <td width='20'> {{ $wedus->kecepatan }}</td>
                                 <td width='5'>  {{ $wedus->jarak }}  </td>

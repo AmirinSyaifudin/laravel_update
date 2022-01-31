@@ -22,6 +22,11 @@
             <li class="list-group-item">
               <b>TANGGAL KELUAR</b> <a class="pull-right"><span class="label label-info">{{ date('D-d-M-Y') }}</span></a>
             </li>
+
+            <li class="list-group-item">
+              <b>TANGGAL KELUAR INDO</b> <a class="pull-right"><span class="label label-info">{{ date('D-d-M-Y') }}</span></a>
+            </li>
+
             <li class="list-group-item">
                 <b>JAM KELUAR</b> <a class="pull-right"><span class="label label-warning">{{ date('H:i:s') }}</span></a>
               </li>

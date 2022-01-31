@@ -109,7 +109,8 @@
                             <td width='20'> {{ $jangkrik->no_parkir }}</td>
                             <td width='20'> {{ $jangkrik->napol }}</td>
                             {{-- <td width='30'>  {{ date('H:i:s | l-d-M-Y',strtotime($jangkrik->created_at)) }}</td> --}}
-                            <td width='30'>  {{ date('H:i:s | l-d-M-Y',strtotime($jangkrik->tanggal_jam_masuk)) }}</td> 
+                            {{-- <td width='30'>  {{ date('H:i:s | l-d-M-Y',strtotime($jangkrik->tanggal_jam_masuk)) }}</td>  --}}
+                            <td scope="row"> {{ tanggal_indonesia($jangkrik->created_at)}} </td>
                             {{-- <td width='30'>{{ $jangkrik->created_at }}</td> --}}
                             <td width='20'> {{ $jangkrik->jenis_kendaraan }}</td>
                             <td width='20'>{{ $jangkrik->tarif_perjam }} </td>

@@ -59,27 +59,27 @@ class KotaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-        $kota = DB::table('kota')
-        ->join('provinsi','kota.provinsi_id','=','provinsi_id')
-        ->select([
-            'provinsi.provinsi_id',
-            'provinsi.nama_provinsi',
-            'kota.nama_kota',
-            'kota.kode_pos',
-            'kota.keterangan',
-        ])
-        ->get();
-        $provinsi = DB::table('provinsi')->get();
-        $data = array(
-            'kota'     => $kota,
-            'provinsi'  =>$provinsi,
-        );
-        // dd($data);
-        return redirect('admin.kota.create', $data);
-    }
+    // public function create()
+    // {
+    //     //
+    //     $kota = DB::table('kota')
+    //     ->join('provinsi','kota.provinsi_id','=','provinsi_id')
+    //     ->select([
+    //         'provinsi.provinsi_id',
+    //         'provinsi.nama_provinsi',
+    //         'kota.nama_kota',
+    //         'kota.kode_pos',
+    //         'kota.keterangan',
+    //     ])
+    //     ->get();
+    //     $provinsi = DB::table('provinsi')->get();
+    //     $data = array(
+    //         'kota'     => $kota,
+    //         'provinsi'  =>$provinsi,
+    //     );
+    //     // dd($data);
+    //     return redirect('admin.kota.create', $data);
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -90,7 +90,9 @@ class KotaController extends Controller
     public function store(Request $request)
     {
     //
-        Kota::updateOrCreate(['kota_id' => $request->kota_id],
+        $provinsi = DB::table('provinsi');
+
+        Kota::updateOrCreate(['kota_id' => $request->kota_id,'provinsi', $request->provinsi_id],
         ['nama_kota'        => $request->nama_kota,
         'provinsi_id'       => $request->provinsi_id,
         'nama_provinsi'     => $request->nama_provinsi,

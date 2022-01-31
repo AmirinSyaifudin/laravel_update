@@ -8,9 +8,8 @@
                 {{-- <a href="{{ route('admin.karyawan.create') }}" class="btn btn-primary">TAMBAH DATA KARYAWAN</a>
              --}}
                 <a class="btn btn-success" href="javascript:void(0)" id="createNewKaryawan">ADD DATA KARYAWAN</a>
-                <a href="{{ route('admin.karyawan.exportExcel') }}" class="btn btn-primary">EXPORT EXCEL</a>
-                {{-- <a href="{{ route('admin.karyawan.exportExcel') }}" class="btn btn-primary">excel</a> --}}
-                <a href="{{ route('admin.karyawan.exportPdf') }}" class="btn btn-primary">EXPORT PDF</a>
+                <a href="" class="btn btn-primary">EXPORT EXCEL</a>
+                <a href="" class="btn btn-primary">EXPORT PDF</a>
             </div>
             <div class="box-body">
 
@@ -138,7 +137,7 @@
                 <div class="form-group">
                     <label for="name" class="col-sm-2 control-label">UPLOAD FOTO</label>
                     <div class="col-sm-12">
-                        <input type="file" name="cover" class="form-control" 
+                        <input type="file" name="foto" class="form-control" 
                         placeholder="" value=""  required="">
                     </div>
                 </div>

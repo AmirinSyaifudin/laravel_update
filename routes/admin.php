@@ -1,8 +1,23 @@
 <?php
+
+use App\Employee;
 use Illuminate\Support\Facades\Route;
+
+// Employee
+use App\Http\Controllers\EmployeeController;
 // use App\Http\Controllers\Admin\ProvinsiController;
 
+//employee
+Route::get('/', [EmployeeController::class, 'index']);
+Route::post('/store', [EmployeeController::class, 'store'])->name('store');
+Route::get('/fetchall', [EmployeeController::class, 'fetchAll'])->name('fetchAll');
+Route::delete('/delete', [EmployeeController::class, 'delete'])->name('delete');
+Route::get('/edit', [EmployeeController::class, 'edit'])->name('edit');
+Route::post('/update', [EmployeeController::class, 'update'])->name('update');
+
+
 Route::get('/', 'HomeController@index')->name('dashboard');
+
 
 // DASHBOARD
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
@@ -60,6 +75,8 @@ Route::get('/karyawan/{karyawan}/edit', 'KaryawanController@edit')->name('karyaw
 Route::put('/karyawan', 'KaryawanController@update')->name('karyawan.update');
 Route::delete('/karyawan', 'KaryawanController@destroy')->name('karyawan.destroy');
 Route::get('/karyawan/{karyawan}/detail', 'KaryawanController@detail')->name('karyawan.detail');
+Route::get('/karyawan/exportexcel', 'KaryawanController@exportExcel')->name('karyawan.exportExcel');
+Route::get('/karyawan/exportpdf', 'KaryawanController@exportPdf')->name('karyawan.exportPdf');
 
 //cuti
 Route::get('/cuti/data', 'DataController@cuti')->name('cuti.data');

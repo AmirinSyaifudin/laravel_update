@@ -1,5 +1,6 @@
 <?php
 
+use App\Provinsi;
 use App\User;
 
 function totalUser()
@@ -81,4 +82,28 @@ function tanggal_indonesia($tgl, $tampil_hari = true)
     }
     $text .= $tanggal . " " . $bulan . " " . $tahun;
     return $text;
+}
+
+
+function totalProvinsi()
+{
+    return Provinsi::count();
+}
+
+
+function totalKota()
+{
+    return Provinsi::count();
+}
+
+
+function totalKabupaten()
+{
+    return Provinsi::count();
+}
+
+
+function totalKaryawan()
+{
+    return Provinsi::count();
 }

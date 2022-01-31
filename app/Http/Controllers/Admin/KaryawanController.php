@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\KaryawanExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Karyawan;
 use App\Cuti;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
+use PDF;
 
 
 class KaryawanController extends Controller
@@ -75,12 +78,12 @@ class KaryawanController extends Controller
         //     'cover'             => 'file|image',
         // ]);
 
-        $cover = null;
+      $cover = null;
 
-        // cek kondisi cover 
-        if ($request->hasFile('cover')) {
-            $cover = $request->file('cover')->store('assets/covers');
-        }
+        // upload image
+        $file = $request->file('cover');
+		$fileName = time() . '.' . $file->getClientOriginalExtension();
+		$file->storeAs('public/images', $fileName);
 
        Karyawan::updateOrCreate(['karyawan_id' => $request->karyawan_id],
        [
@@ -182,5 +185,57 @@ class KaryawanController extends Controller
 
        return response()->json()(['success' => 'Karyawan berhasil di hapus !!!']);
     }
+
+    //excel 
+    public function exportExcel() 
+    {
+        return Excel::download(new KaryawanExport, 'karyawan.xlsx');
+    }
+
+    //PDF
+    public function exportPdf()
+    {
+        $karyawan = \App\Karyawan::all();
+        $pdf = PDF::loadView('admin.export.karyawanpdf', ['karyawan' => $karyawan ]);
+        return $pdf->download('karyawan.pdf');
+    }
 }
 
+
+
+
+// public function store(Request $request)
+//     {
+//         // $this->validate($request, [
+//         //     'no_induk'          => 'required|unique:karyawan',
+//         //     'nama'              => 'required',
+//         //     'alamat'            => 'required',
+//         //     'tanggal_lahir'     => 'required',
+//         //     'tanggal_bergabung' => 'required',
+//         //     'cover'             => 'file|image',
+//         // ]);
+
+//        $cover = null;
+
+//         // cek kondisi cover 
+//         if ($request->hasFile('cover')) {
+//             $cover = $request->file('cover')->store('assets/covers');
+//         }
+
+//         // upload image
+//         $file = $request->file('avatar');
+// 		$fileName = time() . '.' . $file->getClientOriginalExtension();
+// 		$file->storeAs('public/images', $fileName);
+
+//        Karyawan::updateOrCreate(['karyawan_id' => $request->karyawan_id],
+//        [
+//         'no_induk'              => $request->no_induk,
+//         'nama'                  => $request->nama,
+//         'cover'                 => $cover,
+//         'alamat'                => $request->alamat,
+//         'tanggal_lahir'         => $request->tanggal_lahir,
+//         'tanggal_bergabung'     => $request->tanggal_bergabung,
+//        ]);
+
+//        return response()->json(['success'  => 'Karyawan berhasil di tambhakan !!!']);
+//     }

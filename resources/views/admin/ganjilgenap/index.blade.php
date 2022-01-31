@@ -32,10 +32,10 @@
         </div>
         
             <div class="box-body">
-                <hr>
-                <center>  <h4 style="text-transform: uppercase;"> Menampilkan Data Berdasarkan Tahun & Tanggal</h4> </center>
+              
+                {{-- <center>  <h4 style="text-transform: uppercase;"> Menampilkan Data Berdasarkan Tahun & Tanggal</h4> </center> --}}
                 {{-- <h5 class="box-title">MENAMPILKAN DATA BERDASARKAN TANGGAL</h5><br><br> --}}
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <div class="col-md-4 mb-3" align="center" style="color: red;">
                       <label for="validationCustom03">TANGGAL MASUK</label>
                       <input type="date" name="tanggal" class="form-control" 
@@ -77,9 +77,9 @@
                         </div>
                     </div>
                   </div>
-                </div>
+                </div> --}}
 
-                <hr>
+             
 
                 <table id="dataTable" class="table table-bordered table-hover">
                         <thead>
@@ -97,7 +97,8 @@
                                 <tr>
                                     <td width='5'>  {{ $loop-> index +1 }} </td>
                                     {{-- <td width='5'>  {{ date('H:i:s | l-d-M-Y',strtotime($jangkrik->tanggal_mulai)) }}</td> --}}
-                                    <td width='5'>  {{ date('H:i:s | l-d-M-Y',strtotime($jangkrik->created_at)) }}</td>
+                                    <td scope="row"> {{ tanggal_indonesia($jangkrik->created_at)}} </td>
+                                    {{-- <td width='5'>  {{ date('H:i:s | l-d-M-Y',strtotime($jangkrik->created_at)) }}</td> --}}
                                     <td width='20'> {{ $jangkrik->napol }}</td>
                                     <td width='20'> <a class="btn btn-info">{{ $jangkrik->status }}</a></td>
                                     <td width='5'>

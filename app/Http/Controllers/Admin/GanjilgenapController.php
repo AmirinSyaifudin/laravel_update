@@ -53,7 +53,7 @@ class GanjilgenapController extends Controller
         if (strpos($_POST['napol'], ' ') !== false) {
                 // echo 'TIDAK BOLEH MENGGUNAKAN SPASI KAMPRET';
                 return redirect('admin/ganjilgenap')
-                    ->with(['info' => 'SISTEM MENOLAK, JANCUK TIDAK BOLEH MENGGUNAKAN SPASI !!! HAHAHA']);
+                    ->with(['info' => 'SISTEM MENOLAK, TIDAK BOLEH MENGGUNAKAN SPASI !!! HAHAHA']);
                  } else {
                         $napol = preg_replace('/([^0-9]+)/', '', $_POST['napol']);
 
