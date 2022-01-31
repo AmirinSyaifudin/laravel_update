@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" style="border:3px solid #ddd">
     <thead>
         <tr>
             <th>NO INDUK</th>
